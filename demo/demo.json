@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "184fcbdd-c7ae-4935-a752-2347eb682a04",
+		"name": "Allure Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"item": [
+						{
+							"name": "SignUp",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4bd2ec0-10c7-47f5-a90a-85ab7e83f1bb",
+										"exec": [
+											"const jsonData = pm.response.json()",
+											"",
+											"pm.environment.set(\"userEmailAddress\", jsonData.data.emailAddress)",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Test for success message\", function () {",
+											"    pm.expect(jsonData.message).to.eql(\"User successfully signed up\");",
+											"});",
+											"pm.test(\"Body is correct\", function () {",
+											"    pm.expect(jsonData.data).to.have.property(\"houseName\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2fecab40-6f74-4bfa-8c65-e92ec47273f6",
+										"exec": [
+											"pm.environment.set('baseUrl', \"https://api.heatwave.ng/api\")",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "39161581-7a6b-40b9-9fd5-abc7de9c77c9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-request-source",
+										"value": "customer",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fullName\": \"{{$randomFullName}}\",\n    \"emailAddress\": \"{{$randomEmail}}\",\n    \"password\": \"Password12@@\",\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/auth/signup"
+							},
+							"response": []
+						}
+					],
+					"id": "b751ef04-22e1-42bd-898c-c25a894f684f"
+				}
+			],
+			"id": "dc26dbea-53fa-4c6a-ae4c-af7f820563ce"
+		}
+	]
+}
