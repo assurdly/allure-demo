@@ -1,0 +1,1 @@
+{"message":"User successfully signed up","data":{"fullName":"Edith Kertzmann","emailAddress":"Tyrese_Armstrong@hotmail.com","status":"active","phoneNumber":"636-664-8604","role":"customer","orders":[],"_id":"67a1f326123fe0b0daa1eacc","cart":[],"createdAt":"2025-02-04T10:59:50.336Z","updatedAt":"2025-02-04T10:59:50.336Z"}}

@@ -1,0 +1,12 @@
+{
+    "x-request-source": "customer",
+    "Content-Type": "application/json",
+    "User-Agent": "PostmanRuntime/7.39.1",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "f7f6dae6-d076-4143-9e09-e48d2794a6e8",
+    "Host": "api.heatwave.ng",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Length": "156"
+}
