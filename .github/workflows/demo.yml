@@ -1,0 +1,95 @@
+name: Postman Test and Allure Report
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '30 18 * * 3' # Runs every Wednesday at 6:30 PM UTC (7:30 PM local)
+    - cron: '30 18 * * 5' # Runs every Friday at 6:30 PM UTC (7:30 PM local)
+    - cron: '0 20 * * 0'  # Runs every Sunday at 8:00 PM UTC
+
+jobs:
+  run_tests:
+    if: github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/admin')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install newman and newman-reporter-allure
+        run: |
+          npm install -g newman newman-reporter-allure
+          echo "Newman and newman-reporter-allure installed."
+
+      - name: Run Postman tests
+        if: always()
+        continue-on-error: true
+        run: |
+          newman run demo/demo.json --reporters cli,allure
+          echo "Postman tests run."
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          repository: ${{ github.repository }}
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Copy existing content to allure-history
+        run: |
+          mkdir -p allure-history
+          if [ -d gh-pages ]; then
+            cp -r gh-pages/* allure-history/
+          fi
+
+      - name: Generate Allure report
+        id: build
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        continue-on-error: true
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Deploy report to GitHub Pages
+        id: deploy
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
+      - name: Find latest folder in Allure history
+        id: new_folder
+        run: |
+          latest_folder=$(find allure-history -mindepth 1 -maxdepth 1 -type d -name '[0-9]*' | sort -n | tail -n 1)
+          latest_folder_number=$(basename "$latest_folder")
+          echo "Latest Folder Number: $latest_folder_number"
+          echo "LATEST_FOLDER_NUMBER=$latest_folder_number" >> $GITHUB_ENV
+
+      - name: Parse latest summary.json
+        id: parse_latest_json
+        run: |
+          latest_summary_path="allure-history/${LATEST_FOLDER_NUMBER}/widgets/summary.json"
+          echo "Latest Summary Path: $latest_summary_path"
+          
+          if [ -f "$latest_summary_path" ]; then
+            cat "$latest_summary_path"
+            
+            passed_tests=$(jq -r '.statistic.passed' "$latest_summary_path")
+            failed_tests=$(jq -r '.statistic.failed' "$latest_summary_path")
+            total_tests=$((passed_tests + failed_tests))
+            
+            if [ "$total_tests" -gt 0 ]; then
+              passing_percentage=$(( (passed_tests * 100) / total_tests ))
+            else
+              passing_percentage=0
+            fi
+            
+            echo "Passed: $passed_tests, Failed: $failed_tests,
