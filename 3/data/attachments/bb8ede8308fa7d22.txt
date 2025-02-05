@@ -1,0 +1,14 @@
+const jsonData = pm.response.json()
+
+pm.environment.set("userEmailAddress", jsonData.data.emailAddress)
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Test for success message", function () {
+    pm.expect(jsonData.message).to.eql("User successfully signed up");
+});
+pm.test("Body is correct", function () {
+    pm.expect(jsonData.data).to.have.property("houseName");
+});

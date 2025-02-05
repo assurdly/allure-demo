@@ -1,0 +1,1 @@
+{"message":"User successfully signed up","data":{"fullName":"Nellie Gulgowski","emailAddress":"Camilla_Howe4@hotmail.com","status":"active","phoneNumber":"359-680-6921","role":"customer","orders":[],"_id":"67a3b0ae185d59cf5889ee23","cart":[],"createdAt":"2025-02-05T18:40:46.526Z","updatedAt":"2025-02-05T18:40:46.526Z"}}
