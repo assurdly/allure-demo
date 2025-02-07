@@ -1,0 +1,1 @@
+{"message":"User successfully signed up","data":{"fullName":"Ida Dickinson","emailAddress":"Veda.Braun67@hotmail.com","status":"active","phoneNumber":"289-334-6390","role":"customer","orders":[],"_id":"67a654216d08668840298175","cart":[],"createdAt":"2025-02-07T18:42:41.667Z","updatedAt":"2025-02-07T18:42:41.667Z"}}

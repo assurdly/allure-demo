@@ -1,0 +1,6 @@
+{
+    "fullName": "Ida Dickinson",
+    "emailAddress": "Veda.Braun67@hotmail.com",
+    "password": "Password12@@",
+    "phoneNumber": "289-334-6390"
+}
