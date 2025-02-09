@@ -1,0 +1,6 @@
+{
+    "fullName": "Edmund Crona",
+    "emailAddress": "Margie.DuBuque@yahoo.com",
+    "password": "Password12@@",
+    "phoneNumber": "878-990-0952"
+}

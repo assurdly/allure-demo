@@ -1,0 +1,1 @@
+{"message":"User successfully signed up","data":{"fullName":"Edmund Crona","emailAddress":"Margie.DuBuque@yahoo.com","status":"active","phoneNumber":"878-990-0952","role":"customer","orders":[],"_id":"67a90e454c647be4e0c515eb","cart":[],"createdAt":"2025-02-09T20:21:25.450Z","updatedAt":"2025-02-09T20:21:25.450Z"}}
