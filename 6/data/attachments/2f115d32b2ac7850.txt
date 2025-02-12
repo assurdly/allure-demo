@@ -1,0 +1,6 @@
+{
+    "fullName": "Michelle Schneider DVM",
+    "emailAddress": "Heber_Satterfield@gmail.com",
+    "password": "Password12@@",
+    "phoneNumber": "895-238-5140"
+}

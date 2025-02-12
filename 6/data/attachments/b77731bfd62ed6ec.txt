@@ -1,0 +1,1 @@
+{"message":"User successfully signed up","data":{"fullName":"Michelle Schneider DVM","emailAddress":"Heber_Satterfield@gmail.com","status":"active","phoneNumber":"895-238-5140","role":"customer","orders":[],"_id":"67aceb5239b75917d1fd574a","cart":[],"createdAt":"2025-02-12T18:41:22.997Z","updatedAt":"2025-02-12T18:41:22.997Z"}}
