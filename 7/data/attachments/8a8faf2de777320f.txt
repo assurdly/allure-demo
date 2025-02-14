@@ -1,0 +1,6 @@
+{
+    "fullName": "Jan Casper",
+    "emailAddress": "Randall4@gmail.com",
+    "password": "Password12@@",
+    "phoneNumber": "947-245-2296"
+}
